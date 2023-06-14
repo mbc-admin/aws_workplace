@@ -28,7 +28,7 @@ const NavBar = () => {
         //CONECTA EL SOCKET
         let token =localStorage.getItem('token');
         console.log('ENTER IN SOCKET CONNECT', token)
-        socketRef.current = io('http://82.223.37.251:8000/nsp-io-chat', {query: `token=${token}`});
+        socketRef.current = io('https://node.mybeatcoach.com/nsp-io-chat', {query: `token=${token}`});
         socketEvents(JSON.parse(userStorage))
     }, [])
 

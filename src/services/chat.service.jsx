@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const axiosInstance = axios.create({baseURL: 'http://82.223.37.251:8000/api/'});
+const axiosInstance = axios.create({baseURL: 'https://node.mybeatcoach.com/api/'});
 
 /**
  * Recoge los chats ya se hayan cerrado o esten activos (0 = cerrados || 1 = abiertos)

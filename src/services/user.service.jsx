@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const axiosInstance = axios.create({baseURL: 'http://82.223.37.251:8000/api/', responseType: 'json'});
+const axiosInstance = axios.create({baseURL: 'https://node.mybeatcoach.com/api/', responseType: 'json'});
 
 /**
  * Iniciar sesion
