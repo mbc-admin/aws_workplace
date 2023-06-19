@@ -5,11 +5,11 @@ import { ImageAssets } from '../../utils/ImageAssets';
 
 import Avatar from '../avatar/avatar.component';
 
-const UserNavBar = ({name, email}) => {
+const UserNavBar = ({name, email, image, status}) => {
 
     return (
         <div className={'containerUserNavBar'}>
-            <Avatar/>
+            <Avatar image={image} status={status}/>
 
             <div className={'containerTextUserNavBar'}>
                 <p className={'nameUserNavBar'}>{name}</p>

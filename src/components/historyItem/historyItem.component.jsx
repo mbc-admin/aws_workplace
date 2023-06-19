@@ -4,19 +4,23 @@ import './historyItem.css';
 import {ImageAssets} from "../../utils/ImageAssets";
 
 import DotQuantity from "../dotQuantity/dotQuantity.component";
+import * as moment from 'moment';
 
-const HistoryItem = () => {
+const HistoryItem = ({image, name, company, date, press}) => {
 
     return (
-        <div className={'containerHistoryItem'}>
-            <img className={'imageHistoryItem'} src={ImageAssets.userTest}/>
-
-            <div className={'containerTextHistoryItem'}>
-                <p className={'nameHistoryItem'}>Antonio Garcia</p>
-                <p className={'companyHistoryItem'}>Empresa XXX</p>
+        <div className={'containerHistoryItem'} onClick={press}>
+            <div className={'containerImageHistoryItem'}>
+                <img className={'imageHistoryItem'} src={`https://node.innobing.net/${image}`}/>
             </div>
 
-            <p className={'dateHistoryItem'}>20/02/2023</p>
+
+            <div className={'containerTextHistoryItem'}>
+                <p className={'nameHistoryItem'}>{name}</p>
+                <p className={'companyHistoryItem'}>{company}</p>
+            </div>
+
+            <p className={'dateHistoryItem'}>{moment(date).format('DD/MM/YYYY')}</p>
         </div>
     )
 }

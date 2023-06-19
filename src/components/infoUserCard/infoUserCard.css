@@ -21,10 +21,21 @@
     cursor: pointer;
 }
 
-.imageUserCard {
+.containerImageUserCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 8vw;
     height: 8vw;
     border-radius: 100px;
+    overflow: hidden;
+}
+
+.imageUserCard {
+    width: 115%;
+    height: 115%;
+    object-fit: contain;
 }
 
 .nameUserCard {
@@ -49,7 +60,7 @@
     font-weight: 600;
     font-size: 1vw;
     letter-spacing: 0.75px;
-    color: #CC0711;
+    color: #0F1841;
 }
 
 .textDetailsUserCard {

@@ -1,31 +1,3 @@
-.containerMessages {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 90%;
-    height: 100%;
-    max-height: 100%;
-}
-
-.titleMessages {
-    font-weight: 700;
-    font-size: 1.3vw;
-    letter-spacing: 1px;
-    color: #000000;
-}
-
-.containerChatsMessages {
-    overflow: scroll;
-    width: 100%;
-    max-height: 700px;
-    min-height: 105px;
-    margin-top: 3vw;
-}
-
-
-
-
-
 .containerBlocksChat {
     display: flex;
     flex-direction: row;
@@ -41,7 +13,6 @@
     height: 100%;
     border-right: 1px solid rgba(89, 89, 89, 0.2);
 }
-
 
 .headerChat {
     display: flex;

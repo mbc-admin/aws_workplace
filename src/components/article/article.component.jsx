@@ -6,7 +6,7 @@ import {IconAssets} from '../../utils/ImageAssets';
 
 import DotQuantity from '../dotQuantity/dotQuantity.component';
 
-const ArticleComponent = ({press}) => {
+const ArticleComponent = ({article, press}) => {
     const navigate = useNavigate();
 
     const [open, setOpen] = useState(false);
@@ -39,8 +39,8 @@ const ArticleComponent = ({press}) => {
 
                 <div className={'containerDetailsArticleComponent'}>
                     <div className={'detailsArticleComponent'}>
-                        <p className={'titleArticleComponent'}>Titulo</p>
-                        <p className={'descriptionArticleComponent'}>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
+                        <p className={'titleArticleComponent'}>{article.name}</p>
+                        <p className={'descriptionArticleComponent'}>{article.description}</p>
                     </div>
 
                     <div className={'detailsDateArticleComponent'}>
@@ -52,13 +52,13 @@ const ArticleComponent = ({press}) => {
                 </div>
             </div>
             {open &&
-                <div className={'containerSubarticlesArticlesComponent'} onClick={() => navigate('/article')}>
-                    {subarticles.map((subarticle, index) => {
+                <div className={'containerSubarticlesArticlesComponent'}>
+                    {article.Posts.map((subarticle, index) => {
                         return (
-                            <div className={index === subarticles.length -1 ? 'lastSubarticleArticleComponent' : 'subarticleArticleComponent'}>
+                            <div className={index === article.Posts.length - 1 ? 'lastSubarticleArticleComponent' : 'subarticleArticleComponent'} onClick={() => navigate('/article', {state: {post: subarticle}})}>
                                 <div className={'subarticleTextArticleComponent'}>
                                     <p className={'titleSubarticleArticleComponent'}>{subarticle.title}</p>
-                                    <p className={'subtitleSubarticleArticleComponent'}>{subarticle.subtitle}</p>
+                                    <p className={'subtitleSubarticleArticleComponent'}>{subarticle.description}</p>
                                 </div>
 
                                 <img className={'iconSubarticleArticleComponent'} src={IconAssets.right}/>

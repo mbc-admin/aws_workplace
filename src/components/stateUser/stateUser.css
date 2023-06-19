@@ -45,6 +45,14 @@
     background-color: #CC0711;
 }
 
+.dotOrange {
+    width: 0.75vw;
+    height: 0.75vw;
+    margin: 0 0.75vw;
+    border-radius: 100px;
+    background-color: #ffbf47;
+}
+
 .selectStateUser {
     width: 9vw;
     height: 2.5vw;

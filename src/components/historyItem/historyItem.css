@@ -11,11 +11,22 @@
     cursor: pointer;
 }
 
-.imageHistoryItem {
+.containerImageHistoryItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 4.75vw;
     height: 4.75vw;
     margin: 0.95vw 0.70vw 0.95vw 1.55vw;
     border-radius: 100px;
+    overflow: hidden;
+}
+
+.imageHistoryItem {
+    width: 115%;
+    height: 115%;
+    object-fit: contain;
 }
 
 .containerTextHistoryItem {

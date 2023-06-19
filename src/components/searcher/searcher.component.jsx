@@ -3,7 +3,7 @@ import React from 'react';
 import './searcher.css';
 import {IconAssets} from '../../utils/ImageAssets';
 
-const Searcher = () => {
+const Searcher = ({changeValue}) => {
 
     return (
         <div className='containerSearcher'>
@@ -12,6 +12,7 @@ const Searcher = () => {
                 className={'inputSearcher'}
                 placeholder={'Buscar'}
                 type={'text'}
+                onChange={value => changeValue(value.target.value)}
             />
             <img className={'iconDownSearcher'} src={IconAssets.down}/>
         </div>

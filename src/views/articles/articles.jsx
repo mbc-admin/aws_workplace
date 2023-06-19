@@ -1,10 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import './articles.css';
 
 import ArticleComponent from '../../components/article/article.component';
 
+import {getArticles} from '../../services/data.service';
+
 const Articles = () => {
+    const [articles, setArticles] = useState([])
+
+    useEffect(() => {
+        getArticles().then(res => {
+            console.log('Articulos recogidos con exito', res.data);
+            setArticles(res.data);
+        }).catch(err => {
+            console.log('ERROR al recoger los articulos', err);
+        })
+    }, []);
 
     return (
         <div className={'containerArticles'}>
@@ -17,14 +29,12 @@ const Articles = () => {
             </select>
 
             <div className={'containerItemArticles'}>
-                <ArticleComponent/>
-                <ArticleComponent/>
-                <ArticleComponent/>
-                <ArticleComponent/>
-                <ArticleComponent/>
-                <ArticleComponent/>
-                <ArticleComponent/>
-                <ArticleComponent/>
+                {articles.map(article => {
+                    return(
+                        <ArticleComponent article={article}/>
+                    )
+                })
+                }
             </div>
         </div>
 

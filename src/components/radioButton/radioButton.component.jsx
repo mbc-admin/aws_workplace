@@ -2,11 +2,11 @@ import React from 'react';
 
 import './radioButton.css';
 
-const RadioButton = ({text}) => {
+const RadioButton = ({name, id, text, changeValue}) => {
 
     return (
         <div className={'container'}>
-            <input type={'radio'}/>
+            <input name={name} type={'radio'} onChange={value => changeValue(id)}/>
             <p className={'textRadioButton'}>{text}</p>
         </div>
     )

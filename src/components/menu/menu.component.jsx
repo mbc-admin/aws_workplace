@@ -7,15 +7,15 @@ import {useNavigate} from 'react-router-dom';
 
 import DotQuantity from '../dotQuantity/dotQuantity.component';
 
-const Menu = ({route}) => {
+const Menu = ({route, unreadMessages}) => {
     const navigate = useNavigate();
 
     return (
         <div className={'containerMenu'}>
-            <div className={(route === '/' || route === '/chat') ? 'MenuItem' : 'MenuItemNoFocus'} onClick={() => navigate('/')}>
+            <div className={(route === '/' || route === '/chat') ? 'MenuItem' : 'MenuItemNoFocus'} onClick={() => navigate('/chat')}>
                 <img className={'iconMenuItem'} src={(route === '/' || route === '/chat') ? IconAssets.messagesFocus : IconAssets.messagesNoFocus}/>
                 <p className={route === '/' || route === '/chat' ? 'textMenuItemFocus' : 'textMenuItemNoFocus'}>Mensajes</p>
-                <DotQuantity style={{marginRight: 13}} size={'little'} quantity={12} focus={route === '/' || route === '/chat'}/>
+                <DotQuantity style={{marginRight: 13}} size={'little'} quantity={unreadMessages} focus={route === '/' || route === '/chat'}/>
             </div>
 
             <div className={route === '/diary' ? 'MenuItem' : 'MenuItemNoFocus'} onClick={() => navigate('/diary')}>

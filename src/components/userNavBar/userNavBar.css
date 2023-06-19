@@ -9,6 +9,7 @@
 .imageNavBar {
     width: 5vw;
     height: 5vw;
+    border-radius: 100px;
 }
 
 .containerTextUserNavBar {

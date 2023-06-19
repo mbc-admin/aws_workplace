@@ -1,5 +1,12 @@
 .containerMenuChat {
     position: absolute;
+    width: 80%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.menuChat {
+    position: absolute;
     top: 4.2vw;
     right: 2.3vw;
     display: flex;

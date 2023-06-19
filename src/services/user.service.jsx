@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const axiosInstance = axios.create({baseURL: 'https://node.mybeatcoach.com/api/', responseType: 'json'});
+const axiosInstance = axios.create({baseURL: 'https://node.innobing.net/api/', responseType: 'json'});
 
 /**
  * Iniciar sesion
@@ -59,18 +59,101 @@ export const getProfile = () => {
 }
 
 /**
+ * Recoge los eventos del calendario del usuario
+ * */
+export const getCalendar = (idUser) => {
+    const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': localStorage.getItem('token')
+    }
+    return new Promise((resolve, reject) => {
+        axiosInstance.get(`get_working_hours/${idUser}`, {headers}).then(res => {
+            resolve(res);
+        }).catch(err => {
+            reject(err);
+        })
+    })
+}
+/**
+ * Recoge los dias festivos
+ * */
+export const getHolidaysDays = (idUser) => {
+    const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': localStorage.getItem('token')
+    }
+    return new Promise((resolve, reject) => {
+        axiosInstance.get(`holidays`, {headers}).then(res => {
+            resolve(res);
+        }).catch(err => {
+            reject(err);
+        })
+    })
+}
+
+/**
  * Edita la imagen de perfil
  * */
-export const editProfileImage = (image) => {
+export const editProfileImage = async (formData) => {
+
+    const headers = {
+        'Accept':'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Authorization': localStorage.getItem('token')
+    }
+
+    const data = {
+        files: {
+            file: formData
+        }
+    }
+
+
+    return new Promise((resolve, reject) => {
+        axiosInstance.post('update_profile_image', formData, {headers}).then(res => {
+            resolve(res);
+        }).catch(err => {
+            reject(err);
+        })
+    })
+}
+
+/**
+ * Edita la descripcion del usuario
+ * */
+export const editDescription = (description) => {
     const headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': localStorage.getItem('token')
     }
     const data = {
-        file: image
+        description: description
     }
     return new Promise((resolve, reject) => {
-        axiosInstance.post('update_profile_image', data, {headers}).then(res => {
+        axiosInstance.post('update_description', data, {headers}).then(res => {
+            resolve(res);
+        }).catch(err => {
+            reject(err);
+        })
+    })
+}
+
+/**
+ * Cambia el estado del usuario
+ * */
+export const changeStatus = (status) => {
+    console.log('ESTADO', status)
+    return new Promise((resolve, reject) => {
+        const headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': localStorage.getItem('token')
+        }
+
+        const data = {
+            status: status
+        }
+
+        axiosInstance.post('update_coach_status', data, {headers}).then(res => {
             resolve(res);
         }).catch(err => {
             reject(err);

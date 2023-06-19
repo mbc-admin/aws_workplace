@@ -5,25 +5,28 @@ import {ImageAssets} from '../../utils/ImageAssets';
 
 import DotQuantity from "../dotQuantity/dotQuantity.component";
 
-const ChatItem = ({fullName, lastMessage, size, unreadMessages, press}) => {
-    const text = 'Me gustaría que hablemos por videollamada para conocernos. Te...'
+import moment from 'moment';
+
+const ChatItem = ({image, fullName, lastMessage, size, unreadMessages, organization, timeLastMessage, press}) => {
 
     return (
         <div className={'containerChatItem'} onClick={press}>
-            <img className={'imageChatItem'} src={ImageAssets.userTest}/>
+            <div className={'containerImageChatItem'}>
+                <img className={'imageChatItem'} src={image === null ? ImageAssets.userTest : `https://node.innobing.net/${image}`}/>
+            </div>
 
             <div className={'containerTextChatItem'}>
                 <p className={'nameChatItem'}>{fullName}</p>
-                <p className={'companyChatItem'}>Empresa XXX</p>
-                <p className={'lastMessageChatItem'} >{lastMessage}</p>
+                <p className={'companyChatItem'}>Empresa {organization}</p>
+                <p className={'lastMessageChatItem'} >{lastMessage === 'videocall_started' ? 'Iniciar videollamada' : lastMessage}</p>
             </div>
 
             <div className={'containerDetailsChatItem'}>
-                <p className={'timeChatItem'}>10:05</p>
+                <p className={'timeChatItem'}>{timeLastMessage === '' ? '' : moment(timeLastMessage).format('HH:mm')}</p>
                 <DotQuantity
                     size={'big'}
                     focus={false}
-                    quantity={unreadMessages}
+                    quantity={(unreadMessages && unreadMessages.hasOwnProperty('messages')) ? unreadMessages.messages : unreadMessages}
                 />
             </div>
         </div>

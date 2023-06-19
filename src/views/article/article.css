@@ -47,6 +47,13 @@
     width: 12vw;
 }
 
+.descriptionArticle {
+    font-weight: 400;
+    font-size: 0.75vw;
+    letter-spacing: 0.75px;
+    color: #000000;
+}
+
 .pdfArticle {
     margin-top: 2.05vw;
 }

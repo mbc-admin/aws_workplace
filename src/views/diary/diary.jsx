@@ -1,25 +1,39 @@
 import React, {useState, useEffect, useCallback, useMemo} from 'react';
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
-import mobiscroll, {Eventcalendar, getJson, toast, setOptions, localeEs} from '@mobiscroll/react';
+import mobiscroll, {Eventcalendar, getJson, toast, setOptions, localeEs, momentTimezone} from '@mobiscroll/react';
+import * as moment from 'moment';
+
+import {getCalendar, getHolidaysDays} from '../../services/user.service';
+
+momentTimezone.moment = moment;
 
 import './diary.css';
 
+
+setOptions({
+    locale: localeEs,
+    theme: 'ios',
+    themeVariant: 'light'
+});
+
 const Diary = () => {
-    const [myEvents, setEvents] = useState([]);
+    const [typeCalendar, setTypeCalendar] = useState('week');
+    const [myEvents, setMyEvents] = useState([]);
+    const [invalidDays, setInvalidDays] = useState([]);
     const invalids = [{
-        start: '12:00',
-        end: '13:00',
-        title: 'Lunch break',
-        type: 'lunch',
+        start: '06:00',
+        end: '22:00',
+        title: 'Fin de semana',
+        //type: 'lunch',
         recurring: {
             repeat: 'weekly',
-            weekDays: 'MO,TU,WE,TH,FR'
+            weekDays: 'SA,SU'
         }
     }];
     const defaultEvents = [{
         id: 1,
-        start: '2023-03-08T13:00',
-        end: '2023-03-08T13:45',
+        start: '2023-04-18T13:00',
+        end: '2023-04-18T13:45',
         title: 'Lunch @ Butcher\'s',
         description: '',
         allDay: false,
@@ -58,47 +72,53 @@ const Diary = () => {
         background: '#0F1841'
     }];
 
-    /*useEffect(() => {
-        mobiscroll.util.http.getJson('https://trial.mobiscroll.com//workday-events/?vers=5', (events) => {
-            setEvents(events);
-        }, 'jsonp');
-    }, []);*/
+    useEffect(() => {
+        getCalendar(8).then(res => {
+            let events = [];
+            res.data.map(event => {
+                console.log('EVENT', event);
+                events.push(event.recurring);
+            })
+            setMyEvents(events);
+        }).catch(err => {
+            console.log('ERROR al recoger los eventos del calendario', err);
+        })
 
-    const onEventCreateFailed = useCallback((event) => {
-        if (event.invalid.type === "lunch") {
-            toast({
-                message: "Can't create this task on lunch break."
-            });
-        }
-    });
+        getHolidaysDays().then(res => {
+            console.log('Vacaciones recogidas con exito', res.data);
+            let invalids = [];
+            res.data.map(invalid => {
+                invalid.title = 'Festivo';
+                invalids.push(invalid);
+            })
+            setInvalidDays(invalids);
+        }).catch(err => {
+            console.log('ERROR al recoger las vacaciones', err);
+        })
+    }, []);
 
-    const onEventUpdateFailed = useCallback((event) => {
-        if (event.invalid.type === "lunch") {
-            toast({
-                message: "Can't schedule this task on lunch break."
-            });
-        }
-    });
-
-    const view = useMemo(() => {
+    /*const view = useMemo(() => {
         return {
             schedule: {
-                type: 'week',
+                type: typeCalendar,
                 startDay: 1,
-                endDay: 5,
-                startTime: '09:00',
-                endTime: '18:00'
+                endDay: 0,
+                startTime: '06:00',
+                endTime: '22:00',
             }
         };
-    }, []);
+    }, []);*/
 
     return (
         <div className={'containerDiary'}>
             <div className={'containerHeaderDiary'}>
-                <select className={'selectDiary'}>
-                    <option selected>Dia</option>
-                    <option>Semana</option>
-                    <option>Mes</option>
+                <select
+                    className={'selectDiary'}
+                    onChange={value => setTypeCalendar(value.target.value)}
+                >
+                    <option value={'day'}>Dia</option>
+                    <option value={'week'} selected>Semana</option>
+                    <option value={'month'}>Mes</option>
                 </select>
 
                 <div className={'optionDiary'}>
@@ -119,22 +139,25 @@ const Diary = () => {
             <Eventcalendar
                 className={'calendar'}
                 themeVariant="light"
-                locale={localeEs}
                 newEventText={'Work'}
                 event
-                dragToCreate={true}
-                dragToMove={true}
+                dragToCreate={false}
+                clickToCreate={false}
+                dragToMove={false}
                 colorEventList={true}
-                onEventCreate={event => {
-                    console.log('NEW EVENT', event)
-                }}
                 day
                 colors={['#0F1841']}
-                //invalid={invalids}
-                data={defaultEvents}
-                view={view}
-                onEventCreateFailed={onEventCreateFailed}
-                onEventUpdateFailed={onEventUpdateFailed}
+                invalid={invalidDays}
+                data={myEvents}
+                view={{
+                    schedule: {
+                        type: typeCalendar,
+                        startDay: 1,
+                        endDay: 0,
+                        startTime: '06:00',
+                        endTime: '22:00',
+                    }
+                }}
             />
         </div>
     )

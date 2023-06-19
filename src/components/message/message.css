@@ -11,6 +11,9 @@
 }
 
 .containerTextSender {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     text-align: left;
     max-width: 90%;
     padding: 1.25vw 1.79vw 1.40vw 1.5vw;
@@ -23,6 +26,9 @@
 }
 
 .containerTextNotSender {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     text-align: left;
     max-width: 90%;
     padding: 1.25vw 1.5vw 1.40vw 1.79vw;
@@ -61,4 +67,12 @@
     border-radius: 10px;
     background-color: #0F1841;
     color: #FFFFFF;
+}
+
+.containerFileMessageComponent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
 }

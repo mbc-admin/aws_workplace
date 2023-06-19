@@ -4,11 +4,11 @@ export const ImageAssets = {
     originalLogo: require('../assets/img/logos/originalLogo.png'),
     originalLogoAuth: require('../assets/img/logos/originalLogoAuth.png'),
 
-    userTest: require('../assets/img/userTest.png'),
+    userTest: require('../assets/img/notUser.png'),
 
     notFound: require('../assets/img/404.png'),
 
-    pdfTest: require('../assets/img/CV.pdf'),
+    pdfTest: require('../assets/img/sample.pdf'),
 }
 
 export const IconAssets = {
@@ -38,6 +38,7 @@ export const IconAssets = {
     left: require('../assets/img/left.png'),
     back: require('../assets/img/back.png'),
     edit: require('../assets/img/edit.png'),
-    download: require('../assets/img/download.png')
+    download: require('../assets/img/download.png'),
+    file: require('../assets/img/clip.png')
 }
 
